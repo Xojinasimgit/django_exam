@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+    <!-- ======= Intro Single ======= -->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single">Our Amazing Properties</h1>
+                        <span class="color-text-a">Grid Properties</span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Properties Grid
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Intro Single-->
+
+    <!-- ======= Property Grid ======= -->
+
+    <section class="property-grid grid">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="grid-option">
+                    </div>
+                </div>
+                {% for img in categories %}
+                    <div class="col-md-4">
+                        <div class="card-box-a card-shadow">
+                            <div class="img-box-a">
+                                <img src="{{ img.images.url }}" alt="" class="img-a img-fluid">
+                            </div>
+                            <div class="card-overlay">
+                                <div class="card-overlay-a-content">
+                                    <div class="card-header-a">
+                                        <h2 class="card-title-a">
+                                            <span class="color-b">{{ category.name }}</span><br> {{ category.location }}
+                                        </h2>
+                                    </div>
+                                    <div class="card-body-a">
+                                        <div class="price-box d-flex">
+                                            <span class="price-a">rent | $ {{ img.price }}</span>
+                                        </div>
+                                        <a href="{% url 'property_single' img.id %}" class="link-a">Click
+                                            here to
+                                            view
+                                            <span class="bi bi-chevron-right"></span>
+                                        </a>
+                                    </div>
+                                    <div class="card-footer-a">
+                                        <ul class="card-info d-flex justify-content-around">
+                                            <li>
+                                                <h4 class="card-info-title">Area</h4>
+                                                <span>{{ img.area }}
+                          <sup>2</sup>
+                        </span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Beds</h4>
+                                                <span>{{ img.beds }}</span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Baths</h4>
+                                                <span>{{ img.baths }}</span>
+                                            </li>
+                                            <li>
+                                                <h4 class="card-info-title">Garages</h4>
+                                                <span>{{ img.garages }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <nav class="pagination-a">
+                            <ul class="pagination justify-content-end">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                                           tabindex="-1">
+                                            <span class="bi bi-chevron-left"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="page-item">
+                                    <a class="page-link" href="#">{{ page_obj.number }}</a>
+                                </li>
+                                {% if page_obj.has_next %}
+                                    <li class="page-item next">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                            <span class="bi bi-chevron-bar-right"></span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Property Grid Single-->
+
+{% endblock %}
